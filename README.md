@@ -1,72 +1,83 @@
 # pp-seoul-cohort
 
-프프 금융·AI 리터러시 코호트 교육의 **주차별 사이드바 위젯이 누적되는 로컬 Next.js 대시보드**를 만들어 주는 Claude Code 플러그인입니다.
+프프서울 금융·AI 리터러시 코호트 교육을 **Claude Code 안에서 슬래시 커맨드 하나로** 돌리는 플러그인입니다. 별도 웹앱, API 키, Node, 빌드 단계 없이 Claude Code 자체의 Skill 기능만 사용합니다.
 
-매주 운영자가 플러그인을 업데이트하면, 참여자는 `/plugin marketplace update`로 받아 새 주차 스킬을 실행만 하면 사이드바에 그 주의 위젯이 한 칸 더 붙습니다.
+매주 운영자가 새 주차 Skill을 push하면, 참여자는 `/plugin marketplace update`로 받아 슬래시 커맨드 하나만 더 외우면 됩니다.
 
-## 지원 환경 (보수적으로 잠금)
+## 지원 환경
 
-| 항목 | 요구 사양 | 비고 |
-|---|---|---|
-| Claude Code | 최신 안정 버전 (플러그인 marketplace 지원) | `claude --version` |
-| Node.js | **20.11.0 LTS 이상** (22 LTS / 24 가능) | https://nodejs.org/ 에서 "LTS" 설치 |
-| npm | **10.0.0 이상** | Node 20.11+에 기본 포함 |
-| 운영체제 | macOS 12+, Windows 10/11, WSL 2 | Skill이 자동 감지 |
-| 셸 | bash/zsh (mac/linux), PowerShell + Git Bash (Windows) | Windows에서 PowerShell 단독도 가능 |
-| 디스크 | 약 500MB (node_modules 포함) | |
-| 브라우저 | Chrome / Edge / Safari 최신 | 권장: Chrome |
-| 인터넷 | https 통신 (RSS 출처 + npm registry) | 사내 프록시 환경은 별도 설정 필요 |
+| 항목 | 요구 사양 |
+|---|---|
+| Claude Code | 최신 안정 버전 (`/plugin` marketplace 지원) |
+| 인터넷 | https 통신 (RSS / 공시 출처 + GitHub) |
+| OS | macOS / Windows / Linux 무관 — Skill은 Claude Code 안에서 동작 |
 
-의존성은 `templates/dashboard-base/package-lock.json`으로 잠겨 있고 Skill이 `npm ci`로 설치하므로, 위 조건만 충족하면 **모든 참여자가 동일한 의존성 트리 (63 패키지, 모두 정확히 같은 버전)** 를 갖습니다.
+Node, npm, 빌드 도구 모두 불필요. Claude Code만 있으면 됩니다.
 
-## 참여자 사용법 (1주차 세션)
+## 참여자 사용법
 
-```bash
-# 1. 마켓플레이스 등록 (최초 1회)
+```
 /plugin marketplace add siwonblue/pp-seoul-cohort
-
-# 2. 플러그인 설치
 /plugin install pp-seoul-cohort@pp-seoul-cohort
-
-# 3. 1주차 스킬 실행
-/pp-seoul-cohort:week1
-
-# 4. 안내된 명령으로 대시보드 띄우기
-cd ~/Desktop/pp-dashboard   # mac/linux
-npm run dev
-# → http://localhost:3000 → 사이드바 "1주차 · 산업 사이클 리서치"
 ```
 
-Windows에서는 바탕화면이 OneDrive로 리다이렉트될 수 있어 스킬이 자동으로 PowerShell의 `[Environment]::GetFolderPath('Desktop')`로 해석합니다.
+그 다음은 주차별로 안내되는 슬래시 커맨드(`/pp-seoul-cohort:<name>`)를 실행하세요.
+
+## 1주차 — 산업 사이클 분석 (준비 중)
+
+1주차 Skill 묶음은 다음 능력을 다룹니다 (구체적 커맨드 이름은 정식 출시 때 README에 갱신).
+
+- 산업 하나의 사이클 단계 추론 (early/mid/late expansion, recession)
+- 다수 산업의 사이클 위치 표 작성
+- 글로벌·국내 RSS 출처 요약(주요 IB·매크로·뉴스·한국 매체)
+- 주장 출처 확인 (2개 이상 출처 + 반대 근거)
+- 1주차 과제 산출물 템플릿 자동 생성
+
+준비되는 대로 이 README가 갱신되고, `/plugin marketplace update pp-seoul-cohort` 한 번이면 받습니다.
 
 ## 다음 주차 받기
 
-```bash
+```
 /plugin marketplace update pp-seoul-cohort
-/pp-seoul-cohort:week2
 ```
 
-기존 대시보드는 유지되고 사이드바에 2주차 항목이 추가됩니다 (멱등 — 여러 번 돌려도 중복 안 생김).
+새 주차 Skill이 즉시 활성화됩니다(설치 추가 단계 없음).
 
-## 운영자: 새 주차 추가하기
+## 더 알아보기 — "Claude Code로 웹앱까지 만들어보기" (선택 과제)
 
-1. `skills/weekN/SKILL.md` 를 `skills/week1/SKILL.md` 복사해서 N 자리만 바꿔 새로 만듭니다.
-2. `templates/weekN/` 디렉터리를 만들어 그 주차에 추가될 파일(페이지, 컴포넌트)을 넣습니다.
-3. SKILL.md 안의 사이드바 항목, sources 항목 인라인 스니펫을 그 주차 내용으로 바꿉니다.
-4. 커밋 + push.
-5. 참여자에게 "/plugin marketplace update pp-seoul-cohort 한 번 돌리고 /pp-seoul-cohort:weekN 실행하세요" 안내.
+이 플러그인의 v0는 Claude Code Skill이 사용자 바탕화면에 **로컬 Next.js 대시보드**를 만드는 노선이었습니다. RSS 위젯이 사이드바에 누적되는 풀스택 구현으로, "Claude Code로 풀스택을 어디까지 자동화할 수 있나"를 가늠해 볼 수 있는 좋은 표본입니다.
+
+본 코호트 진행에 **필수는 아닙니다**. 다만 다음 호기심이 있다면 1주차 끝나고 한 번 둘러보세요.
+
+- Claude Code Skill에 macOS/Windows 분기와 npm ci까지 들어간 보수적 환경 잠금이 어떻게 구현되는지
+- RSS 7종을 카드 그리드로 스캐닝하는 Linear 미감 UI
+- 매 주차 사이드바에 위젯이 누적되는 멱등 레지스트리 패턴
+
+🔗 브랜치: https://github.com/siwonblue/pp-seoul-cohort/tree/archive/dashboard-v0
+
+직접 띄워보려면:
+
+```bash
+git clone --branch archive/dashboard-v0 https://github.com/siwonblue/pp-seoul-cohort.git pp-dashboard-archive
+# 이 브랜치의 README가 설치 방법을 안내합니다.
+```
+
+## 운영자: 새 주차 추가
+
+1. `skills/weekN-xxxx/SKILL.md` 한 장 작성 (frontmatter + 본문 markdown).
+2. 커밋 + push.
+3. 참여자에게 `/plugin marketplace update pp-seoul-cohort` 안내.
 
 ## 구조
 
 ```
-.claude-plugin/         # 플러그인 메타 + 마켓플레이스 정의
-skills/weekN/SKILL.md   # 주차별 스킬 (Claude 따라 실행)
-templates/
-  dashboard-base/       # 최초 1회만 복사되는 Next.js 베이스
-  weekN/                # 매 주차 추가로 복사되는 위젯 파일
-design.md               # Linear 기반 디자인 토큰
+.claude-plugin/   플러그인 메타 + 마켓플레이스 정의
+skills/           주차·주제별 슬래시 커맨드 (SKILL.md 묶음)
 ```
 
-## 디자인
+## 브랜치
 
-`design.md` 참조. Linear 다크 우선 미감을 기본으로 하며, 추후 프프 브랜드 컬러가 정해지면 `--accent` 변수 하나만 교체하면 됩니다.
+| 브랜치 | 용도 |
+|---|---|
+| `main` | Skill 묶음 (활성 코호트용) |
+| `archive/dashboard-v0` | 초기 Next.js 대시보드 구현 (참고용 보존) |
