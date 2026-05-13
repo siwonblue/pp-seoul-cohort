@@ -1,0 +1,6 @@
+{
+  "name": "pp-seoul-cohort",
+  "description": "프프 코호트 교육의 주차별 사이드바 위젯이 누적되는 로컬 Next.js 대시보드를 만들어 줍니다.",
+  "version": "0.1.0",
+  "author": { "name": "siwonblue" }
+}

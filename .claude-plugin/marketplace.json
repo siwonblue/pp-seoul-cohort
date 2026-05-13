@@ -1,0 +1,11 @@
+{
+  "name": "pp-seoul-cohort",
+  "owner": { "name": "siwonblue" },
+  "plugins": [
+    {
+      "name": "pp-seoul-cohort",
+      "source": "./",
+      "description": "프프 코호트 — 주차별 위젯이 누적되는 로컬 Next.js 대시보드 빌더."
+    }
+  ]
+}
