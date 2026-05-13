@@ -4,9 +4,22 @@
 
 매주 운영자가 플러그인을 업데이트하면, 참여자는 `/plugin marketplace update`로 받아 새 주차 스킬을 실행만 하면 사이드바에 그 주의 위젯이 한 칸 더 붙습니다.
 
-## 참여자 사용법 (1주차 세션)
+## 지원 환경 (보수적으로 잠금)
 
-전제: Claude Code, Node.js ≥ 18, git이 설치되어 있어야 합니다.
+| 항목 | 요구 사양 | 비고 |
+|---|---|---|
+| Claude Code | 최신 안정 버전 (플러그인 marketplace 지원) | `claude --version` |
+| Node.js | **20.11.0 LTS 이상** (22 LTS / 24 가능) | https://nodejs.org/ 에서 "LTS" 설치 |
+| npm | **10.0.0 이상** | Node 20.11+에 기본 포함 |
+| 운영체제 | macOS 12+, Windows 10/11, WSL 2 | Skill이 자동 감지 |
+| 셸 | bash/zsh (mac/linux), PowerShell + Git Bash (Windows) | Windows에서 PowerShell 단독도 가능 |
+| 디스크 | 약 500MB (node_modules 포함) | |
+| 브라우저 | Chrome / Edge / Safari 최신 | 권장: Chrome |
+| 인터넷 | https 통신 (RSS 출처 + npm registry) | 사내 프록시 환경은 별도 설정 필요 |
+
+의존성은 `templates/dashboard-base/package-lock.json`으로 잠겨 있고 Skill이 `npm ci`로 설치하므로, 위 조건만 충족하면 **모든 참여자가 동일한 의존성 트리 (63 패키지, 모두 정확히 같은 버전)** 를 갖습니다.
+
+## 참여자 사용법 (1주차 세션)
 
 ```bash
 # 1. 마켓플레이스 등록 (최초 1회)
