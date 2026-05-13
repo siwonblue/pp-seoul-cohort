@@ -16,16 +16,20 @@ Node, npm, 빌드 도구 모두 불필요.
 
 ## 참여자 설치 (1주차 시작 전 1회)
 
-마켓플레이스 두 개 등록 + 플러그인 두 개 설치:
+마켓플레이스 세 개 등록 + 플러그인 세 개 설치 (각 줄 사이마다 신뢰 확인 프롬프트가 뜨면 Y):
 
 ```
 # 1) 본 코호트 플러그인
 /plugin marketplace add siwonblue/pp-seoul-cohort
 /plugin install pp-seoul-cohort@pp-seoul-cohort
 
-# 2) 사실확인·출처검증용 외부 플러그인 (jamditis MIT)
+# 2) 사실확인·출처검증 (jamditis MIT)
 /plugin marketplace add jamditis/claude-skills-journalism
 /plugin install journalism-core@claude-skills-journalism
+
+# 3) SNS/소셜 시그널 aggregator (mvanhorn MIT, API 키 불필요)
+/plugin marketplace add mvanhorn/last30days-skill
+/plugin install last30days@last30days-skill
 ```
 
 이로써 다음 슬래시 커맨드가 사용 가능해집니다.
@@ -38,16 +42,18 @@ Node, npm, 빌드 도구 모두 불필요.
 | `/pp-seoul-cohort:weekly-note` | 본 플러그인 | 1주차 리서치 노트 자동 저장 |
 | `/journalism-core:fact-check-workflow` | journalism (외부) | 주장 사실확인 |
 | `/journalism-core:source-verification` | journalism (외부) | 출처/딥페이크 검증 |
+| `/last30days:<topic>` | last30days (외부) | Reddit · X · HN · Polymarket · YouTube · TikTok · GitHub 등 SNS 통합 시그널 |
 
 ## 1주차 — 산업 사이클 분석 진행 순서
 
 90분 세션 권장 흐름:
 
-1. **전체 그림** (10분) — `/pp-seoul-cohort:research-feed` 로 최근 매크로/시장/한국 뉴스 훑기
-2. **사이클 맵** (15분) — `/pp-seoul-cohort:cycle-map` 으로 산업 10개 위치 표 작성, 딥다이브 산업 1개 결정
-3. **딥다이브** (40분) — `/pp-seoul-cohort:industry-cycle` 로 그 산업의 가설·5근거·반박 정리
-4. **사실확인** (15분) — 근거 중 의심스러운 주장을 `/journalism-core:fact-check-workflow` 로 검증
-5. **노트 저장** (10분) — `/pp-seoul-cohort:weekly-note` 로 한 페이지 산출물 자동 생성 → `~/Documents/pp-seoul-notes/week1/`
+1. **전체 그림 — 매크로/시장** (10분) — `/pp-seoul-cohort:research-feed` 로 RSS 7종(Fed·WSJ·CNBC·SA·한국경제) 훑기
+2. **소셜 시그널** (5분) — `/last30days <후보 산업명/키워드>` 로 Reddit/X/HN/Polymarket의 최근 30일 흐름 확인. 군중의 관심·논쟁이 어디에 모여있나.
+3. **사이클 맵** (10분) — `/pp-seoul-cohort:cycle-map` 으로 산업 10개 위치 표, 딥다이브 산업 1개 결정
+4. **딥다이브** (35분) — `/pp-seoul-cohort:industry-cycle` 로 그 산업의 가설·5근거·반박 정리. 중간에 `/last30days <산업명>` 재호출로 보조 시그널 추가 가능.
+5. **사실확인** (15분) — 의심스러운 주장은 `/journalism-core:fact-check-workflow` 로 검증
+6. **노트 저장** (10분) — `/pp-seoul-cohort:weekly-note` 로 한 페이지 산출물 자동 생성 → `~/Documents/pp-seoul-notes/week1/`
 
 ## 다음 주차 받기
 
@@ -105,5 +111,7 @@ skills/
 
 ## 라이선스
 
-코호트 운영자(siwonblue) 결정 (현재 미설정).  
-의존 플러그인 `claude-skills-journalism` 은 MIT (jamditis).
+코호트 운영자(siwonblue) 결정 (현재 미설정).
+의존 외부 플러그인:
+- `claude-skills-journalism` (jamditis) — MIT
+- `last30days-skill` (mvanhorn) — MIT
