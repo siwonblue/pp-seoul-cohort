@@ -92,7 +92,7 @@ cp -R "$PLUGIN/templates/week1/." "$DASH/"
   { id: "cnbc-finance", week: 1, label: "CNBC — Finance", category: "news", country: "US", url: "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=10000664" },
   { id: "seekingalpha-currents", week: 1, label: "Seeking Alpha — Market Currents", category: "ib-insights", country: "US", url: "https://seekingalpha.com/market_currents.xml" },
   { id: "seekingalpha-main", week: 1, label: "Seeking Alpha — Research", category: "ib-insights", country: "US", url: "https://seekingalpha.com/feed.xml" },
-  { id: "hankyung-economy", week: 1, label: "한국경제 — 경제", category: "news", country: "KR", url: "https://www.hankyung.com/feed/economy" },
+  { id: "hankyung-economy", week: 1, label: "한국경제 — 경제", category: "korea", country: "KR", url: "https://www.hankyung.com/feed/economy" },
 ```
 
 ### 8) 의존성 설치 (최초 실행일 때만)
